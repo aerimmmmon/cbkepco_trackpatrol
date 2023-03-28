@@ -11,6 +11,9 @@ import static androidx.room.OnConflictStrategy.REPLACE;
 
 @Dao
 public interface MainDao {
+
+    static String TABLE_NAME = "navi";
+
     @Insert(onConflict = REPLACE)
     void insert(MainData mainData);
 
@@ -20,9 +23,7 @@ public interface MainDao {
     @Delete
     void reset(List<MainData> mainData);
 
-    @Query("UPDATE table_name SET text = :sText WHERE ID = :sID")
-    void update(int sID, String sText);
-
-    @Query("SELECT * FROM table_name")
+    @Query("SELECT * FROM " + TABLE_NAME)
     List<MainData> getAll();
+
 }
