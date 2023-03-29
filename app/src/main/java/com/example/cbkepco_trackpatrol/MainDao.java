@@ -11,7 +11,6 @@ import static androidx.room.OnConflictStrategy.REPLACE;
 
 @Dao
 public interface MainDao {
-
     static String TABLE_NAME = "navi";
 
     @Insert(onConflict = REPLACE)

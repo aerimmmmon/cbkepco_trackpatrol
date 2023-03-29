@@ -35,7 +35,7 @@ public class SQLiteDBOpenHelper extends SQLiteOpenHelper {
     public SQLiteDBOpenHelper(Context context) {
         super(context, OpticalCableTrack.DATABASE_NAME, null, DATABASE_VERSION);
 
-        File dbFile = context.getDatabasePath(OpticalCableTrack.DATABASE_PATH);
+        File dbFile = context.getDatabasePath(OpticalCableTrack.DATABASE_NAME);
 
         if (!dbFile.exists()) {
             // assets 폴더에서 데이터베이스 파일을 복사하여 생성

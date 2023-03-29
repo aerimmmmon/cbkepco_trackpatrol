@@ -2,6 +2,7 @@ package com.example.cbkepco_trackpatrol;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -15,16 +16,26 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<MainData> dataList = new ArrayList<>();
-    RoomDB database;
+    // version 1 : SQLite DB
+    SQLiteDBOpenHelper sqldbHelper;
+    SQLiteDatabase sqliteDatabase;
+
+    // version 2 : Room DB
+    RoomDB roomDatabase;
+    List<MainData> roomDataList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        database = RoomDB.getInstance(this);
-        dataList = database.mainDao().getAll();
+        // version 1 : SQLite DB 생성
+        sqldbHelper = new SQLiteDBOpenHelper(this);
+        sqliteDatabase = sqldbHelper.getWritableDatabase();
+
+        // version 2 : Room DB 생성
+        roomDatabase = RoomDB.getInstance(this);
+        roomDataList = roomDatabase.mainDao().getAll();
 
         LinearLayout linearLayoutTmap = (LinearLayout)findViewById(R.id.linearLayoutTmap);
         TMapView tMapView = new TMapView(this);
@@ -36,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         TMapPoint tMapPoint1 = new TMapPoint(37.570841, 126.985302); // SKT타워
 
-        Log.d("print", dataList.toString());
+        Log.d("print", roomDataList.toString());
 
     }
 
