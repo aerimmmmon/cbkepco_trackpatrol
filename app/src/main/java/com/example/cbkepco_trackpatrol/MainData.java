@@ -1,15 +1,20 @@
 package com.example.cbkepco_trackpatrol;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 
 @Entity(tableName = "navi")
 public class MainData implements Serializable {
+
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    @ColumnInfo(name = "id")
+    @NonNull private Integer id = 0;
 
     @ColumnInfo(name = "mainGroup")
     private String mainGroup;
@@ -24,13 +29,22 @@ public class MainData implements Serializable {
     private String powerName;
 
     @ColumnInfo(name = "lat")
-    private String lat;
+    @NotNull private Float lat = 0.0F;
 
     @ColumnInfo(name = "lon")
-    private String lon;
+    @NotNull private Float lon = 0.0F;
 
     @ColumnInfo(name = "address")
     private String address;
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getMainGroup() {
         return mainGroup;
@@ -64,19 +78,19 @@ public class MainData implements Serializable {
         this.powerName = powerName;
     }
 
-    public String getLat() {
+    public float getLat() {
         return lat;
     }
 
-    public void setLat(String lat) {
+    public void setLat(float lat) {
         this.lat = lat;
     }
 
-    public String getLon() {
+    public float getLon() {
         return lon;
     }
 
-    public void setLon(String lon) {
+    public void setLon(float lon) {
         this.lon = lon;
     }
 
